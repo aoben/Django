@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Here goes customers orders details</h1>
+    <div class="container jumbotron">
+       {{order.id|safe|linebreaksbr}}
+       {{order.menu_id|safe|linebreaksbr}}
+       {{order.menu_id.price}}
+    </div>
+{% endblock %}

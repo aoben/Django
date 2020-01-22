@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+      <div class="container  row">
+
+      <!-- Here goes the order details section -->
+
+        <div class="card col-md-8 border-secondary  jumbotron orderdetail">
+
+          <div class="card-header"><h5>Step 1: Confirm Order</h5></div>
+            <div class="card-title ml-auto">Qty Price</div>
+          {% for object in cx_order %}
+          <hr style="border: 1px solid grey;" />
+              <table class="">
+                <tr>
+                  <td>{{object.menu_id.type}}, {{object.menu_id.item}}, {{object.menu_id.size}}</td>
+                  <td></td>
+                  <td>{{object.quantity}}</td>
+                  <td>${{object.menu_id.price}}</td>
+                </tr>
+
+                <tr>
+                  <td>{{object.topping}}</td>
+                  <td></td>
+                  <td><a href="#">edit</a></td>
+                  <td><a href="#">remove</a></td>
+                </tr>
+              </table>
+          {% endfor %}
+
+          <div class="total">
+            <br>
+            <p>Total:</p>
+          </div>
+          </div>
+
+
+      <!-- Here go the extra informtion section -->
+
+      <div class="card border-danger col-md-3 ml-auto extrainfo">
+        <h1>Here goes customers orders</h1>
+
+      </div>
+
+    </div>
+
+
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-warning">Checkout</button>
+    </form>
+{% endblock %}

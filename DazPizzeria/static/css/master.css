@@ -1,0 +1,18 @@
+/* td {
+    border: 1px solid black;
+} */
+
+#brandname {
+    color: rgb(36, 92, 94);
+    background-color: #1a2621;
+}
+
+.scrollable {
+  position: relative;
+  overflow-y: scroll;
+  height: auto;
+}
+
+body {
+  position: relative;
+}

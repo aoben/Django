@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+  {% block content %}
+      <h3>Sign Up!</h3>
+      <div class="jumbotron">
+        <form class="form" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary" name="button">Submit</button>
+        </form>
+      </div>
+      <p class="container">Already have an account? <a href="{% url 'account:login' %}">Log In Here!</a></p>
+  {% endblock %}

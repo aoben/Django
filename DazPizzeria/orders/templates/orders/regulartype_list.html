@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Regular Type</h1>
+
+<div class="jumbotron table-responsive-sm">
+    <table class="table">
+        <thead>
+            <th>Item</th>
+            <th>Small</th>
+            <th>Large</th>
+        </thead>
+
+    {% for object in regulartype %}
+        <tr><td>{{object.item}}</td>
+        <td>${{object.small}}</td>
+        <td>${{object.large}}</td></tr>
+     {% endfor %}
+    </table>
+</div>
+
+<h1>Sicilian Type</h1>
+
+<div class="jumbotron table-responsive-sm">
+    <table class="table">
+        <thead>
+            <th>Item</th>
+            <th>Small</th>
+            <th>Large</th>
+        </thead>
+
+    {% for object in siciliantype %}
+        <tr><td>{{object.item}}</td>
+        <td>${{object.small}}</td>
+        <td>${{object.large}}</td></tr>
+     {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

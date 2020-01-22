@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+  {% block content %}
+
+    <div class="table container jumbotron">
+      <table>
+        <thead>
+          <th>Type</th>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Topping</th>
+        </thead>
+        <tr>
+          {% for object in objects %}
+          <td>{{object.menu_id.type}}</td>
+          <td>{{object.menu_id.item}}</td>
+          <td>{{object.menu_id.price}}</td>
+          <td>{{object.topping}}</td>
+          {% endfor %}
+        </tr>
+      </table>
+
+    </div>
+
+    <div class="container jumbotron">
+      <form class="form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="button">Add</button>
+      </form>
+    </div>
+
+    <div class="container jumbotron">
+        <a href="{% url 'orders:placeorder' %}">Continue</a> ordering or <a href="#">Checkout</a>
+    </div>
+
+  {% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if not valueset %}
+      <form method="POST" class="post-form">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" name="typeform" class="save btn btn-primary">SELECT</button>
+      </form>
+
+  {% elif typeValue == "Regular Pizza" or typeValue == "Sicilian Pizza" %}
+
+      <h1>{{typeValue}}</h1>
+      <table class="table">
+        <thead>
+            <th>Item</th>
+            <th>Size</th>
+            <th>Price</th>
+        </thead>
+        {% for value in valueset %}
+        <tr>
+            <form class="form_class" method="POST">
+                {% csrf_token %}
+              <td>{{ value.item }}</td>
+              <td>{{ value.size }}</td>
+              <td>{{ value.price }}</td>
+              <input type="hidden" name="menuitem" value="{{value.pk}}">
+              <input type="hidden" name="quantity" value="1" >
+              <td><button type="submit" name="itemform" class="save btn btn-primary" name="button">Add</button></td>
+
+
+            </form>
+        </tr>
+        {% endfor %}
+      </table>
+
+
+<!-- Type value no pizza  -->
+    {% else %}
+    <h1>{{typeValue}}</h1>
+    <table class="table">
+      <thead>
+          <th>Item</th>
+          <th>Size</th>
+          <th>Price</th>
+          <th>Quantity</th>
+      </thead>
+      {% for value in valueset %}
+      <tr>
+          <form class="form_class" method="POST">
+              {% csrf_token %}
+            <td>{{ value.item }}</td>
+            <td>{{ value.size }}</td>
+            <td>{{ value.price }}</td>
+            <input type="hidden" name="menuitem" value="{{value.pk}}">
+            <td><input type="number" name="quantity" value="" ></td>
+            <td><button type="submit" name="itemform" class="save btn btn-primary" name="button">Add</button></td>
+
+
+          </form>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if typeValue == "Regular Pizza" or typeValue == "Sicilian Pizza" %}
+      {% for object in toppings %}
+      <p>{{ object }}</p>
+      {% endfor %}
+    {% endif %}
+{% endblock %}

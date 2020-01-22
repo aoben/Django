@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container row">
+
+  <div class="col-sm-3">
+      <nav class="navbar sticky-top" id="navbar-menu">
+        <a class="navbar-brand" href="#">Menu</a>
+        <nav class="nav flex-column nav-tabs" style="background-color: #d5dbd9;" >
+          <a class="nav-link" href="#regulartype">Regular Type</a>
+          <a class="nav-link" href="#siciliantype">Sicilian Type</a>
+          <a class="nav-link" href="#subs">Subs</a>
+          <a class="nav-link" href="#pasta">Pasta</a>
+          <a class="nav-link" href="#salads">Salads</a>
+          <a class="nav-link" href="#dinnerplatters">Dinner Platters</a>
+        </nav>
+      </nav>
+
+
+  </div>
+
+  <div class="col-sm-9 scrollable">
+      <div data-spy="scroll" data-target="#navbar-menu" data-offset="0">
+
+        <h4 id="regulartype">Regular Type</h4>
+        <p>
+          <table class="jumbotron table table-responsive-sm">
+              <thead>
+                  <th>Item</th>
+                  <th>Size</th>
+                  <th>Price</th>
+              </thead>
+
+            {% for object in regulartype %}
+                <tr>
+                  <td>{{object.item}}</td>
+                  <td>{{object.size}}</td>
+                  <td>${{object.price}}</td>
+                </tr>
+             {% endfor %}
+            </table>
+        </p>
+
+        <h4 id="siciliantype">Sicilian Type</h4>
+        <p>
+              <table class="jumbotron table table-responsive-sm">
+                <thead>
+                    <th>Item</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                </thead>
+
+            {% for object in siciliantype %}
+                <tr><td>{{object.item}}</td>
+                <td>{{object.size}}</td>
+                <td>${{object.price}}</td></tr>
+             {% endfor %}
+            </table>
+          </p>
+
+          <h4 id="subs">Subs</h4>
+          <p>
+              <table class="jumbotron table table-responsive-sm">
+                <thead>
+                    <th>Item</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                </thead>
+
+              {% for object in subs %}
+                  <tr><td>{{object.item}}</td>
+                  <td>{{object.size}}</td>
+                  <td>${{object.price}}</td></tr>
+               {% endfor %}
+              </table>
+          </p>
+
+          <h4 id="pasta">Pasta</h4>
+          <p>
+              <table class="jumbotron table table-responsive-sm">
+                  <thead>
+                      <th>Item</th>
+                      <th>Size</th>
+                      <th>Price</th>
+                  </thead>
+
+              {% for object in pasta %}
+                  <tr><td>{{object.item}}</td>
+                  <td>{{object.size}}</td>
+                  <td>${{object.price}}</td></tr>
+               {% endfor %}
+              </table>
+          </p>
+
+          <h4 id="salads">Salads</h4>
+          <p>
+                <table class="jumbotron table table-responsive-sm">
+                  <thead>
+                      <th>Item</th>
+                      <th>Size</th>
+                      <th>Price</th>
+                  </thead>
+
+              {% for object in salads %}
+                  <tr><td>{{object.item}}</td>
+                  <td>{{object.size}}</td>
+                  <td>${{object.price}}</td></tr>
+               {% endfor %}
+              </table>
+          </p>
+
+          <h4 id="dinnerplatters">Dinner Platters</h4>
+          <p>
+                <table class="jumbotron table table-responsive-sm">
+                  <thead>
+                      <th>Item</th>
+                      <th>Size</th>
+                      <th>Price</th>
+                  </thead>
+
+              {% for object in dinner_platters %}
+                  <tr><td>{{object.item}}</td>
+                  <td>{{object.size}}</td>
+                  <td>${{object.price}}</td></tr>
+               {% endfor %}
+              </table>
+          </p>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

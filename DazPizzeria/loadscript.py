@@ -4,9 +4,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pizza.settings')
 
 import django
 django.setup()
+import pandas as pd
 
-##Fake pop script
-import random
+#Import django models to added from django. Alternatively we can use Postgres python API to load data.
 from orders.models import Menu, ItemType, Topping
 
 
@@ -15,15 +15,26 @@ def add_Item():
     for i in choices:
         print(i)
         item = ItemType.objects.get_or_create(itemType=i)
+# id  Type
+# 1   'Regular Pizza'
+# 2   'Sicilian Pizza'
+# 3   'Salads'
+# 4   'Subs'
+# 5   'Pasta'
+# 6   'Dinner Platters'
 
+
+#Read excel file with menu table
+cwd = os.path.dirname(os.path.abspath(__file__))
+menu = os.path.join(cwd,'menulist.xlsx')
+
+menudf = pd.read_excel(menu)
 def add_menu():
-    choices = ({'Item': 'Cheese', 'Size':'Small', 'Price':12.70},{'Item': 'Special', 'Size':'Small', 'Price':30.45},{'Item': 'Garden Salad', 'Size':'Regular', 'Price':9.75},)
-    item = ItemType.objects.all()
-    ind = 0
-    for i in item:
-        #print(i.pk)
-        menu = Menu.objects.get_or_create(type_id=i, item=choices[ind]['Item'], size=choices[ind]['Size'],price=choices[ind]['Price'],)
-        ind +=1
+    for i, j in menudf.iterrows():
+        # i-sheetname j-table header
+        reg = ItemType.objects.get(itemType=j['type_id'])
+        Menu.objects.create(type =reg, item=j['item'], size=j['size'], price=j['price'])
+
 
 def add_toppings():
     toppings = ['Pepperoni',
@@ -51,35 +62,10 @@ def add_toppings():
         print(i)
     print("Toppings population done!")
 
-# topics = ['Search', 'Social', 'Marketplace', 'News', 'Games']
-#
-# def add_topic():
-#     t = Topic.objects.get_or_create(top_name=random.choice(topics))[0]
-#     t.save()
-#
-#     return t
-#
-# def populate(N=5):
-#
-#     for entry in range(N):
-#
-#         #get the topic for the entry
-#         top = add_topic()
-#
-#         #create the fake data for entry
-#         fake_url = fakegen.url()
-#         fake_date = fakegen.date()
-#         fake_name = fakegen.company()
-#
-#         webpg = Webpage.objects.get_or_create(topic=top, url = fake_url, name=fake_name)[0]
-#
-#         #create a fake access record for that webpage
-#
-#         acc_rec = AccessRecord.objects.get_or_create(name=webpg, date=fake_date)[0]
 
 if __name__ == '__main__':
     print("populating script!")
     add_toppings()
-    #add_Item()
-    #add_menu()
+    add_Item()
+    add_menu()
     print("population complete!")
